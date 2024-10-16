@@ -1,0 +1,39 @@
+application:
+  timezone: UTC
+  locale: en
+
+  spring:
+    application:
+      name: stake-api
+    web:
+      locale: en_US
+      messages: messages/messages
+      encoding: UTF-8
+    jpa:
+      hibernate:
+        ddl-auto: none
+    http:
+      multipart:
+        enabled: true
+    servlet:
+      multipart:
+        enabled: true
+        max-file-size: 10MB
+        max-request-size: 10MB
+logging:
+  level:
+    root: debug
+debug: false
+
+
+# DB Setting
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: stake-api-project
+    password: localProject
+    connection-test-query: SELECT 1
+    minimum-idle: 5
+    maximum-pool-size: 5
+    url: jdbc:mysql://localhost:3306/stake_project?allowMultiQueries=true&useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC&cacheCallableStmts=true&autoReconnect=true&zeroDateTimeBehavior=CONVERT_TO_NULL&allowPublicKeyRetrieval=true
+

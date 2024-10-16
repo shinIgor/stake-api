@@ -1,0 +1,57 @@
+@startuml
+'https://docs.google.com/spreadsheets/d/17_o1Sys_XAPWzm45wTlv57WyS9zAWIb-IyHPZO2fBqE/edit#gid=271782268
+
+entity "contract_mt" as contract_mt {
+  contract_mt_id : bigint unsigned
+  --
+    secret
+}
+
+entity "stake_pool_mt" as stake_mt {
+ stake_pool_mt_id INT UNSIGNED
+  --
+ stake_pool_mt_id INT UNSIGNED
+ contract_mt_id BIGINT UNSIGNED
+ staking_token_id BIGINT UNSIGNED
+ contract_admin_mt_id INT UNSIGNED
+ created_at TIMESTAMP
+ updated_at TIMESTAMP
+}
+
+entity "stake_reward_mt" as reward_mt {
+ stake_reward_mt_id INT UNSIGNED
+  --
+ stake_reward_mt_id INT UNSIGNED
+ stake_pool_mt_id INT UNSIGNED
+ reward_token_mt_id BIGINT UNSIGNED
+ reward_amount BIGINT UNSIGNED
+ reward_duration BIGINT UNSIGNED
+ reward_per_token BIGINT UNSIGNED
+ reward_start_at TIMESTAMP
+ reward_period_finish TIMESTAMP
+ created_at TIMESTAMP
+}
+
+entity "stake_staker_ut" as stake_ut {
+  stake_staker_ut_id BIGINT UNSIGNED
+  --
+  stake_staker_ut_id BIGINT UNSIGNED
+  stake_pool_mt_id INT UNSIGNED
+  wallet_address VARCHAR(50)
+  stake_amount BIGINT UNSIGNED
+  total_reward_paid BIGINT UNSIGNED
+  stake_at TIMESTAMP
+  unstake_at TIMESTAMP
+  stake_flag TINY INT
+  created_at TIMESTAMP
+}
+
+'------------------------------------------------------------
+contract_mt ||--o{ stake_mt : contract_mt_id
+stake_mt ||--o{ reward_mt: stake_pool_mt_id
+contract_mt ||--o{ reward_mt: contract_mt_id(reward_token_mt_id)
+stake_mt||--o{ stake_ut : stake_pool_mt_id
+
+
+
+@enduml

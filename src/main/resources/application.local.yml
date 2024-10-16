@@ -1,0 +1,10 @@
+## DB Setting
+#spring:
+#  datasource:
+#    driver-class-name: com.mysql.jdbc.Driver
+#    url: jdbc:mysql://localhost:3306/stake_project?allowMultiQueries=true&useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC&cacheCallableStmts=true&autoReconnect=true&zeroDateTimeBehavior=CONVERT_TO_NULL&allowPublicKeyRetrieval=true
+#    username: stake-api-project
+#    password: localProject
+#    connection-test-query: SELECT 1
+#    minimum-idle: 5
+#    maximum-pool-size: 5
