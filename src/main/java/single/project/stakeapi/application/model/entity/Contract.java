@@ -34,4 +34,8 @@ public class Contract extends BaseEntity {
     @Size(max = 50)
     @Column(name = "contract_name")
     String contractName;
+
+    @Size(max = 50)
+    @Column(name = "contract_address")
+    String contractAddress;
 }
