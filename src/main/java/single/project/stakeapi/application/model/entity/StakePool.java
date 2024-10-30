@@ -1,8 +1,7 @@
 package single.project.stakeapi.application.model.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.AccessLevel;
 import lombok.Data;
@@ -17,6 +16,7 @@ import java.math.BigInteger;
 @Getter
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@Table(name = "stake_pool_mt")
 public class StakePool extends BaseEntity {
     @Id
     @Column(name = "stake_pool_mt_id")
@@ -34,4 +34,20 @@ public class StakePool extends BaseEntity {
     @Size(max = 50)
     @Column(name = "contract_address")
     String contractAddress;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonManagedReference
+    @JoinColumn(name = "contract_mt_id", referencedColumnName = "contract_mt", insertable = false, updatable = false)
+    Contract contract;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonManagedReference
+    @JoinColumn(name = "staking_token_id", referencedColumnName = "contract_mt", insertable = false, updatable = false)
+    Contract stakeERC20;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonManagedReference
+    @JoinColumn(name = "contract_admin_mt_id", referencedColumnName = "contract_admin_mt", insertable = false, updatable = false)
+    ContractAdmin contractAdmin;
+
 }

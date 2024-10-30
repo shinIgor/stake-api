@@ -1,8 +1,7 @@
 package single.project.stakeapi.application.model.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Getter;
@@ -19,6 +18,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@Table(name = "stake_reward_mt")
 public class StakeReward {
     @Id
     @Column(name = "stake_reward_mt_id")
@@ -49,4 +49,13 @@ public class StakeReward {
     @Column(name = "created_at", nullable = false)
     LocalDateTime createdAt;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonManagedReference
+    @JoinColumn(name = "stake_pool_mt_id", referencedColumnName = "stake_pool_mt", insertable = false, updatable = false)
+    StakePool stakePool;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonManagedReference
+    @JoinColumn(name = "reward_token_id", referencedColumnName = "contract_mt", insertable = false, updatable = false)
+    Contract rewardERC20;
 }

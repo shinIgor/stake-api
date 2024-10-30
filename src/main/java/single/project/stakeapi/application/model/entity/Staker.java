@@ -1,8 +1,7 @@
 package single.project.stakeapi.application.model.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.AccessLevel;
 import lombok.Data;
@@ -21,6 +20,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@Table(name = "stake_staker_ut")
 public class Staker extends BaseEntity {
     @Id
     @Column(name = "stake_staker_ut_id")
@@ -47,4 +47,9 @@ public class Staker extends BaseEntity {
 
     @Column(name = "unstake_at")
     LocalDateTime unstakeAt;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonManagedReference
+    @JoinColumn(name = "stake_pool_mt_id", referencedColumnName = "stake_pool_mt", insertable = false, updatable = false)
+    StakePool stakePool;
 }
