@@ -11,6 +11,7 @@ import java.util.function.Predicate;
 public enum CommonErrorMessage implements BaseErrorMessage {
     UNKNOWN(-999, "unknown", HttpStatus.INTERNAL_SERVER_ERROR),
 
+    INVALID_PARAM(400, "Invalid Parameter", HttpStatus.BAD_REQUEST),
 
     BAD_REQUEST(400, "Bad request.", HttpStatus.BAD_REQUEST),
     UNAUTHORIZED(401, "", HttpStatus.UNAUTHORIZED),

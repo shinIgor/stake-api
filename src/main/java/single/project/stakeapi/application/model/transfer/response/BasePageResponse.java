@@ -4,6 +4,8 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldDefaults;
+import org.springframework.data.domain.Pageable;
+import single.project.stakeapi.application.util.PageUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +16,16 @@ import java.util.List;
 public class BasePageResponse<T> {
     Integer currentPage = 0;
     Integer pageSize = 0;
-    Long totalPage = 0L;
+    Integer totalPage = 0;
+    Long totalElements = 0L;
     List<T> contents = new ArrayList<>();
+
+    public BasePageResponse(List<T> contents, Pageable pageable, Long count) {
+        this.currentPage = pageable.getPageNumber() + 1;
+        this.pageSize = pageable.getPageSize();
+        this.totalElements = count;
+        this.totalPage = (Math.toIntExact(PageUtil.getTotalPage(pageable.getPageSize(), totalElements)));
+        this.contents = contents;
+    }
 }
 
